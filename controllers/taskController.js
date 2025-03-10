@@ -5,7 +5,7 @@ const { sendSMS } = require("../utils/twilioService");
 // ✅ Get all tasks for logged-in user
 exports.getTasks = async (req, res) => {
   try {
-    const tasks = await Task.find({ user: req.user }).sort({ date: 1 });
+    const tasks = await Task.find({ user : req.user }).sort({ date: 1 });
     res.json(tasks);
   } catch (err) {
     res.status(500).json({ error: err.message });
@@ -14,6 +14,7 @@ exports.getTasks = async (req, res) => {
 
 // ✅ Update a task
 exports.updateTask = async (req, res) => {
+  console.log(req.params.id, req.body);
   try {
     const updatedTask = await Task.findByIdAndUpdate(req.params.id, req.body, {
       new: true,
